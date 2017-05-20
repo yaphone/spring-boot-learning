@@ -48,7 +48,7 @@ public class BaseConfig {
 		if (DigestUtils.shaHex(sb.toString()).equals(signature)) {
 			return echostr;
 		}
-		return echostr;
+		return echostr; // 这里先不判断了，直接返回echostr
 
 	}
 
