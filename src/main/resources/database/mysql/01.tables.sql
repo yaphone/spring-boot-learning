@@ -1,0 +1,3 @@
+CREATE TABLE USER (
+	username CHAR(20) NOT NULL PRIMARY KEY, 
+	password CHAR(40) NOT NULL);

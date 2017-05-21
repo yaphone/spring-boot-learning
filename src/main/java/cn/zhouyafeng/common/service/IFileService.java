@@ -8,6 +8,6 @@ package cn.zhouyafeng.common.service;
  * @version 1.0
  *
  */
-public class IFileServiceFace {
+public interface IFileService {
 
 }
