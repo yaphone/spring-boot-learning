@@ -32,10 +32,10 @@ public class FileServiceImpl implements IFileService {
 		String qrPath = configurations.getQrPath();
 		UserEntity user = userService.getUserEntityByUsername(username);
 		if (user != null) {
-			if (user.getPassword().equals(password)) {
-				File localFile = new File(qrPath + File.separator + username + ".jpg");
+			if (user.getPassword().equals(password)) { // 这里只是做一个简单的处理，比较用户名和密码一致即认为验证成功
+				File localFile = new File(qrPath + File.separator + username + ".jpg"); // 以用户名作为文件名
 				try {
-					multiFile.transferTo(localFile);
+					multiFile.transferTo(localFile); // 保存用户登陆图片到本地
 					return true;
 				} catch (Exception e) {
 					e.printStackTrace();
