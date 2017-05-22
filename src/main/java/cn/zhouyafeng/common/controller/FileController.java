@@ -1,8 +1,8 @@
 package cn.zhouyafeng.common.controller;
 
-import java.io.File;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.zhouyafeng.common.service.IFileService;
+
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/file")
 public class FileController {
 
-	private static String filePath = "D://itchat4j/test";
+	@Autowired
+	private IFileService fileService;
 
 	/**
 	 * 上传文件
@@ -30,11 +33,13 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/put", method = RequestMethod.POST)
 	@ResponseBody
-	String uploadFile(@RequestParam("userName") String userName, String password,
-			@RequestParam("file") MultipartFile multiFile) throws IOException {
-		File localFile = new File(filePath + File.separator + userName + ".jpg");
-		multiFile.transferTo(localFile);
-		return "OK";
+	String uploadFile(String username, String password, @RequestParam("file") MultipartFile multiFile)
+			throws IOException {
+		boolean res = fileService.saveUserQrPic(username, password, multiFile);
+		if (res) {
+			return "OK";
+		}
+		return "ERROR";
 	}
 
 }

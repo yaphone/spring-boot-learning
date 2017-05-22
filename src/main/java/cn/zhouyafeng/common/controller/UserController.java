@@ -28,7 +28,7 @@ public class UserController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody
 	String test(String username) {
-		UserEntity user = userService.getUserEntityByUserName(username);
+		UserEntity user = userService.getUserEntityByUsername(username);
 		System.out.println(user.getUsername() + "--" + user.getPassword());
 		return user.getUsername() + "--" + user.getPassword();
 	}

@@ -14,9 +14,8 @@ public class UserServiceImpl implements IUserService {
 	UserMapper userMapper;
 
 	@Override
-	public UserEntity getUserEntityByUserName(String userName) {
-		UserEntity user = userMapper.getUserEntityByUserName(userName);
-		return user;
+	public UserEntity getUserEntityByUsername(String username) {
+		return userMapper.getUserEntityByUserName(username);
 	}
 
 }

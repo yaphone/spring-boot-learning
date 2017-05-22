@@ -1,5 +1,7 @@
 package cn.zhouyafeng.common.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * 文件服务接口
  * 
@@ -9,5 +11,5 @@ package cn.zhouyafeng.common.service;
  *
  */
 public interface IFileService {
-
+	public boolean saveUserQrPic(String username, String password, MultipartFile multiFile);
 }
