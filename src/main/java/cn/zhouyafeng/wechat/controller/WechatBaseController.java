@@ -1,14 +1,12 @@
-package cn.zhouyafeng.wechat.base;
+package cn.zhouyafeng.wechat.controller;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.zhouyafeng.wechat.service.IBaseService;
 
 /**
  * 微信基本配置
@@ -20,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @EnableAutoConfiguration
-public class BaseConfig {
+@RequestMapping("/wechat")
+public class WechatBaseController {
 
-	private static String token = "yaphone";
+	@Autowired
+	private IBaseService baseService;
 
 	@RequestMapping("/test")
 	String home() {
@@ -39,17 +39,7 @@ public class BaseConfig {
 	 */
 	@RequestMapping("/wechat/verification")
 	String verification(String signature, String timestamp, String nonce, String echostr) {
-		List<String> args = Arrays.asList(token, timestamp, nonce);
-		Collections.sort(args);
-		StringBuilder sb = new StringBuilder();
-		for (String arg : args) {
-			sb.append(arg);
-		}
-		if (DigestUtils.shaHex(sb.toString()).equals(signature)) {
-			return echostr;
-		}
-		return echostr; // 这里先不判断了，直接返回echostr
-
+		return baseService.checkSignature(signature, timestamp, nonce, echostr);
 	}
 
 	@RequestMapping("/hello/{myName}")

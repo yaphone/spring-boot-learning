@@ -9,6 +9,9 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:cn.zhouyafeng.App</config>
+		<config>java:cn.zhouyafeng.common.controller.FileController</config>
+		<config>java:cn.zhouyafeng.common.controller.UserController</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
