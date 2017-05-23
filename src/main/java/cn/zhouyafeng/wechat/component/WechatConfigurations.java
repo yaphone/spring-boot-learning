@@ -15,6 +15,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class WechatConfigurations {
 	private String token;
+	private String appid;
+	private String appsecret;
+
+	public String getAppid() {
+		return appid;
+	}
+
+	public void setAppid(String appid) {
+		this.appid = appid;
+	}
+
+	public String getAppsecret() {
+		return appsecret;
+	}
+
+	public void setAppsecret(String appsecret) {
+		this.appsecret = appsecret;
+	}
 
 	public String getToken() {
 		return token;
