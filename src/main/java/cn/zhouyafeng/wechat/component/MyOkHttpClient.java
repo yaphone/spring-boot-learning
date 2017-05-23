@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
-
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -44,12 +42,11 @@ public class MyOkHttpClient {
 				httpBuider.addQueryParameter(param.getKey(), param.getValue());
 			}
 		}
-		LOG.info(JSON.toJSONString(url));
 		Request request = new Request.Builder().url(httpBuider.build()).build();
+		// Request request = new Request.Builder().url(url).build();
 		Call call = client.newCall(request);
 		try {
 			Response response = call.execute();
-			LOG.info(JSON.toJSONString(response.body()));
 			return response;
 		} catch (Exception e) {
 			LOG.debug(e.getMessage());
