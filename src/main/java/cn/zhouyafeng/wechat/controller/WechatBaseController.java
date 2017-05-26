@@ -1,5 +1,10 @@
 package cn.zhouyafeng.wechat.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +25,7 @@ import cn.zhouyafeng.wechat.service.IBaseService;
 @EnableAutoConfiguration
 @RequestMapping("/wechat")
 public class WechatBaseController {
+	private static Logger LOG = LoggerFactory.getLogger(WechatBaseController.class);
 
 	@Autowired
 	private IBaseService baseService;
@@ -37,9 +43,23 @@ public class WechatBaseController {
 	 * @date 2017年5月20日 上午12:04:24
 	 * @return
 	 */
-	@RequestMapping("/wechat/verification")
-	String verification(String signature, String timestamp, String nonce, String echostr) {
-		return baseService.checkSignature(signature, timestamp, nonce, echostr);
+	// @RequestMapping("/wechat")
+	// String verification(String signature, String timestamp, String nonce,
+	// String echostr) {
+	// return baseService.checkSignature(signature, timestamp, nonce, echostr);
+	// }
+	@RequestMapping("/index")
+	public String wechat(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getMethod().equals("GET")) { // 处理GET请求
+			String signature = request.getParameter("signature");
+			String timestamp = request.getParameter("timestamp");
+			String nonce = request.getParameter("echostr");
+			String echostr = request.getParameter("echostr");
+			return baseService.checkSignature(signature, timestamp, nonce, echostr);
+		} else { // 处理POST请求
+			LOG.info(request.getParameter("body"));
+			return "POST";
+		}
 	}
 
 	@RequestMapping("/hello/{myName}")
