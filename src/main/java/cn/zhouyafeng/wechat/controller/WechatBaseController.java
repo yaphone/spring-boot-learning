@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.zhouyafeng.wechat.service.IBaseService;
@@ -48,18 +49,18 @@ public class WechatBaseController {
 	// String echostr) {
 	// return baseService.checkSignature(signature, timestamp, nonce, echostr);
 	// }
-	@RequestMapping("/index")
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String wechat(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getMethod().equals("GET")) { // 处理GET请求
-			String signature = request.getParameter("signature");
-			String timestamp = request.getParameter("timestamp");
-			String nonce = request.getParameter("echostr");
-			String echostr = request.getParameter("echostr");
-			return baseService.checkSignature(signature, timestamp, nonce, echostr);
-		} else { // 处理POST请求
-			LOG.info(request.getParameter("body"));
-			return "POST";
-		}
+		String signature = request.getParameter("signature");
+		String timestamp = request.getParameter("timestamp");
+		String nonce = request.getParameter("echostr");
+		String echostr = request.getParameter("echostr");
+		return baseService.checkSignature(signature, timestamp, nonce, echostr);
+	}
+
+	@RequestMapping(value = "/index", method = RequestMethod.POST)
+	public String Wechat(HttpServletRequest request, HttpServletResponse response) {
+		return null;
 	}
 
 	@RequestMapping("/hello/{myName}")
