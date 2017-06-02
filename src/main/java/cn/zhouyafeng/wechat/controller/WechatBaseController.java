@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.zhouyafeng.wechat.service.IBaseService;
+import cn.zhouyafeng.wechat.service.IWechatService;
 
 /**
  * 微信基本配置
@@ -30,6 +31,8 @@ public class WechatBaseController {
 
 	@Autowired
 	private IBaseService baseService;
+	@Autowired
+	private IWechatService wechatService;
 
 	@RequestMapping("/test")
 	String home() {
@@ -60,6 +63,14 @@ public class WechatBaseController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.POST)
 	public String Wechat(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+			return wechatService.postHandler(request);
+
+		} catch (Exception e) {
+			LOG.debug(e.getMessage());
+			e.printStackTrace();
+		}
 		return null;
 	}
 

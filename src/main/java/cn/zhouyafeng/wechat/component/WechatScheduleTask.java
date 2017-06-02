@@ -52,7 +52,7 @@ public class WechatScheduleTask {
 		JSONObject accessTokenobj = JSONObject.parseObject(response.body().string());
 		String accessToken = accessTokenobj.getString("access_token");
 		wechatInfoStorage.setAccessToken(accessToken);
-		LOG.info(wechatInfoStorage.getAccessToken());
+		LOG.debug(wechatInfoStorage.getAccessToken());
 	}
 
 }
