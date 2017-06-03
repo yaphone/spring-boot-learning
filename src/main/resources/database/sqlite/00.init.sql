@@ -1,0 +1,1 @@
+sqlite3 wecaht_helper.db;
