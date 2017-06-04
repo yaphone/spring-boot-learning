@@ -22,4 +22,10 @@ public class MainController {
 		return modelAndView;
 	}
 
+	@RequestMapping("regist")
+	public ModelAndView regist() {
+		ModelAndView modelAndView = new ModelAndView("/regist");
+		return modelAndView;
+	}
+
 }
